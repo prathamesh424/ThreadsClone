@@ -26,12 +26,11 @@ export default function RootLayout ({children} :
                 <html>
                     <body className={inter.className}> 
                         < Navbar/>
-                        <main>
+                        <main className='flex flex-row'>
                             <Left/>
                                 <section className='main-container'>
                                     <div className='w-full max-w-4xl'>
                                         {children}
-                                        <h1 className='head-text'> HOME</h1>
                                     </div>
                                 </section>
                             <Right/>
