@@ -27,12 +27,22 @@ const Page =async () => {
                       <Link key={activity._id} href={`/thread/${activity.parentId}`}>
                           <article className="activity-card">
                               <Image
-                              src={activity.author.image}/>
+                              src={activity.author.image}
+                              alt="Profile Pic"
+                              width={22}
+                              height={22}
+                              className="rounded-full object-cover"/>
+                              <p className="!text-small-regular text-light-1">
+                                <span className="mr-1 text-primary-500">
+                                  {activity.author.name}
+                                </span>{" "}
+                                replied to your thread   
+                              </p>
                           </article>
                       </Link>
                     ))}</>
                 
-                ) : <p>No Activity yet</p>}
+                ) : <p className="!text-base-regular text-light-3">No Activity yet</p>}
           </section>
       </section>
     )
