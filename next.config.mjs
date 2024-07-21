@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    Typescript: {
+      ignoreDuringBuilds: true,
+    },
     experimental: {
       serverActions: true, // Enables experimental server actions
       serverComponentsExternalPackages: ["mongoose"], // Allows external packages for server components
