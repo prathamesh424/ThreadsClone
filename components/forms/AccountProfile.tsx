@@ -100,7 +100,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         const imageDataUrl = event.target?.result?.toString() || "";
         fieldChange(imageDataUrl);
       };
-      
+
       fileReader.readAsDataURL(file);
     }
   };
@@ -209,7 +209,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500 hover:bg-purple-400'>
+        <Button type='submit' className='bg-primary-500'>
           {btnTitle}
         </Button>
       </form>
