@@ -12,7 +12,7 @@ async function Page() {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
-    <>
+    <>   
       <h1 className='head-text'>Create Thread</h1>
 
       <PostThread userId={userInfo._id} />

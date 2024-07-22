@@ -1,8 +1,12 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+// Resource: https://clerk.com/docs/nextjs/middleware#auth-middleware
+// Copy the middleware code as it is from the above resource
 
-export default clerkMiddleware({
-    // publicRoutes:[ '/' , '/api/webhook/clerk'] 
-    // ignoredRoutes: ['/api/webhook/clerk']
+import { authMiddleware } from "@clerk/nextjs/server";
+
+export default authMiddleware({
+   publicRoutes: ["/api/webhook/clerk"],
+
+   ignoredRoutes: ["/api/webhook/clerk"],
 });
 
 export const config = {
