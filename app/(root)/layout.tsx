@@ -15,7 +15,7 @@ const inter = Inter({subsets: ['latin']})
 
 export const metadata : Metadata ={
     title: 'Threads',
-    description: ' A Next.js 13 Social Threads Webapp',
+    description: ' A Next.js Social Threads Webapp',
 }
 
 export default function RootLayout ({children} :
