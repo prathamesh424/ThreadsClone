@@ -248,7 +248,6 @@ export async function deleteCommunity(communityId: string) {
     });
 
     await Promise.all(updateUserPromises);
-
     return deletedCommunity;
   } catch (error) {
     console.error("Error deleting community: ", error);
