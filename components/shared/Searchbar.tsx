@@ -30,7 +30,7 @@ function Searchbar({ routeType }: Props) {
   return (
     <div className='searchbar'>
       <Image
-        src='/assets/search-gray.svg'
+        src='/images/search-gray.svg'
         alt='search'
         width={24}
         height={24}

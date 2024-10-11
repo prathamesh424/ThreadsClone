@@ -129,7 +129,7 @@
 
 /* Shadcn Component Styles */
 
-/* Tab */
+ 
 .tab {
   @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
 }
@@ -137,8 +137,7 @@
 .no-focus {
   @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
-
-/* Account Profile  */
+ 
 .account-form_image-label {
   @apply flex h-24 w-24 items-center justify-center rounded-full bg-dark-4 !important;
 }
@@ -150,8 +149,7 @@
 .account-form_input {
   @apply border border-dark-4 bg-dark-3 text-light-1 !important;
 }
-
-/* Comment Form */
+ 
 .comment-form {
   @apply mt-10 flex items-center gap-4 border-y border-y-dark-4 py-5 max-xs:flex-col !important;
 }

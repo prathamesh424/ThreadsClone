@@ -57,13 +57,12 @@ function Left() {
           );
         })}
       </div>
-
       <div className='mt-10 px-6'>
         <SignedIn>
           <SignOutButton>
             <div className="flex cursor-pointer gap-4 p-4 cl-sign-out-button">
               <Image
-                src="/assets/logout.svg"
+                src="/images/logout.svg"
                 alt="logout"
                 width={22}
                 height={22}

@@ -27,8 +27,8 @@ function DeleteThread({
 
   return (
     <Image
-      src='/assets/delete.svg'
-      alt='delte'
+      src='/images/delete.svg'
+      alt='delete'
       width={18}
       height={18}
       className='cursor-pointer object-contain'

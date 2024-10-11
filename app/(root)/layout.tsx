@@ -14,13 +14,11 @@ import Navbar from '@/components/shared/Navbar';
 const inter = Inter({subsets: ['latin']})
 
 export const metadata : Metadata ={
-    title: 'Threads',
-    description: ' A Next.js Social Threads Webapp',
+    title: 'Let`s Tweet',
 }
 
 export default function RootLayout ({children} :
     {children : React.ReactNode}){
-
         return (
             <ClerkProvider>
                 <html>

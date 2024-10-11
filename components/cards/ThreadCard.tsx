@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { CiHeart } from "react-icons/ci";
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
  
@@ -62,7 +62,7 @@ function ThreadCard({
 
           <div className='flex w-full flex-col'>
             <Link href={`/profile/${author.id}`} className='w-fit'>
-              <h4 className='cursor-pointer text-base-semibold text-light-1'>
+              <h4 className='cursor-pointer text-base-semibold text-purple-400'>
                 {author.name}
               </h4>
             </Link>
@@ -72,31 +72,32 @@ function ThreadCard({
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
                 <Image
-                  src='/assets/heart-gray.svg'
-                  alt='heart'
+                  src='/images/heart-gray.svg'
+                  alt='like'
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
                 />
+
                 <Link href={`/thread/${id}`}>
                   <Image
-                    src='/assets/reply.svg'
-                    alt='heart'
+                    src='/images/reply.svg'
+                    alt='commit'
                     width={24}
                     height={24}
                     className='cursor-pointer object-contain'
                   />
                 </Link>
                 <Image
-                  src='/assets/repost.svg'
-                  alt='heart'
+                  src='/images/repost.svg'
+                  alt='forward'
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
                 />
                 <Image
-                  src='/assets/share.svg'
-                  alt='heart'
+                  src='/images/share.svg'
+                  alt='share'
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
