@@ -49,8 +49,9 @@ function Left() {
                 alt={link.label}
                 width={24}
                 height={24}
+        
               />
-              <p className='text-light-1 max-lg:hidden'>
+              <p className='text-primary_text max-lg:hidden'>
                 {link.label}
               </p>
             </Link>

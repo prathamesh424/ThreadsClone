@@ -1,7 +1,7 @@
-import { Metadata } from 'next';
+"use client"
 import '../globals.css';
 import { Inter } from 'next/font/google';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClerkProvider } from '@clerk/nextjs';
 import Left from '@/components/shared/Left';
 import Right from '@/components/shared/Right';
@@ -11,16 +11,32 @@ import { Toaster } from 'react-hot-toast'; // Import Toaster component
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: "Let's Tweet",
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.classList.add(savedTheme);
+    } else {
+      document.body.classList.add(theme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(newTheme);
+  };
+
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Navbar />
+          <Navbar theme={theme} toggleTheme={toggleTheme} /> {/* Pass theme and toggleTheme */}
           <main className="flex flex-row">
             <Left />
             <section className="main-container">

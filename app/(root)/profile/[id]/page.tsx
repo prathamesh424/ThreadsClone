@@ -1,7 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-
-import PostThread from "@/components/forms/PostThread";
+ 
 import { fetchUser } from "@/lib/actions/user.actions";
 import ProfileHeader from "@/components/shared/ProfileHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,7 +16,7 @@ const Page = async ({params} : {params : { id: string}}) => {
     const userInfo = await fetchUser(params.id);
     if (!userInfo?.onboarded) redirect("/onboarding");
     return(
-        <section className="text-light-1">
+        <section className="text-primary_text">
                  <ProfileHeader
                    accountId={userInfo.id}
                    authUserid={user.id}
@@ -52,7 +51,7 @@ const Page = async ({params} : {params : { id: string}}) => {
                         </TabsList>
                         { profileTabs.map((tab) => (
                             <TabsContent key={`content-${tab.value}`}
-                            value={tab.value} className="w-full text-light-1">
+                            value={tab.value} className="w-full text-primary_text">
                                     <ThreadsTab
                                         currentUserId= {user.id}
                                         accountId= {userInfo.id}

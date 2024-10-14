@@ -188,6 +188,23 @@ module.exports = {
         "light-4": "#5C5C7B",
         "gray-1": "#697C89",
         glassmorphism: "rgba(16, 16, 18, 0.60)",
+
+      
+        background: "rgba(var(--background))",
+
+        color1 : "rgba(var(--color1))",
+        color2 : "rgba(var(--color2))",
+        color3 : "rgba(var(--color3))",
+        color4 : "rgba(var(--color4))",
+        primary_text : "rgba(var(--primary-text))" ,
+        
+        border: "rgba(var(--border))",
+        card: "rgba(var(--card))",
+        "copy-primary": "rgba(var(--copy-primary))",
+        "copy-secondary": "rgba(var(--copy-secondary))",
+        cta: "rgba(var(--cta))",
+        "cta-active": "rgba(var(--cta-active))",
+        "cta-text": "rgba(var(--cta-text))",
       },
       boxShadow: {
         "count-badge": "0px 0px 6px 2px rgba(219, 188, 159, 0.30)",
