@@ -6,7 +6,7 @@ import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";  
-
+export const dynamic = 'force-dynamic';
 import {
   Form,
   FormControl,

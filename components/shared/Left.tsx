@@ -68,7 +68,7 @@ function Left() {
                 width={22}
                 height={22}
               />
-              <p className='text-light-2 max-lg:hidden'>
+              <p className='text-primary_text max-lg:hidden'>
                 Logout
               </p>
             </div>

@@ -7,7 +7,7 @@ import Left from '@/components/shared/Left';
 import Right from '@/components/shared/Right';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
-import { Toaster } from 'react-hot-toast'; // Import Toaster component
+import { Toaster } from 'react-hot-toast'; 
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Navbar theme={theme} toggleTheme={toggleTheme} /> {/* Pass theme and toggleTheme */}
+          <Navbar theme={theme} toggleTheme={toggleTheme} /> 
           <main className="flex flex-row">
             <Left />
             <section className="main-container">
@@ -45,8 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Right />
           </main>
           <Footer />
-
-          {/* Toaster component for toast notifications */}
+ 
           <Toaster position="top-right" reverseOrder={false} />
         </body>
       </html>
