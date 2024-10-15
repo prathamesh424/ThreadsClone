@@ -6,7 +6,7 @@ type NavbarProps = {
   theme: string;
   toggleTheme: () => void;
 };
-
+ 
 function Navbar({ theme, toggleTheme }: NavbarProps) {
   return (
     <nav className="topbar flex justify-between items-center p-4">
