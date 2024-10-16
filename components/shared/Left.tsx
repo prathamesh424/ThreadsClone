@@ -44,13 +44,15 @@ function Left() {
               key={link.label}
               className={`leftsidebar_link ${isActive && 'bg-primary-500'}`}
             >
-              <Image
+              {/* <Image
                 src={link.imgURL}
                 alt={link.label}
                 width={24}
                 height={24}
-        
-              />
+              /> */}
+
+            <div className='font-bold h-5 text-primary_text text-heading3-bold'>{link.logo}</div>
+              
               <p className='text-primary_text max-lg:hidden'>
                 {link.label}
               </p>

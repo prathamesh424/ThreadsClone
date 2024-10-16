@@ -38,6 +38,7 @@ const Page = async ({params} : {params : { id: string}}) => {
                                         height={24}  
                                         className="object-contain" 
                                     />
+
                                     <p className="max-sm:hidden">{tab.label}</p>
                                     {
                                         tab.label ==='Threads' && (
@@ -49,6 +50,7 @@ const Page = async ({params} : {params : { id: string}}) => {
                                 </TabsTrigger>
                             ))}
                         </TabsList>
+
                         { profileTabs.map((tab) => (
                             <TabsContent key={`content-${tab.value}`}
                             value={tab.value} className="w-full text-primary_text">
