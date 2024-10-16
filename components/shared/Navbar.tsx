@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from "react";
-
+import { BiLogOut } from "react-icons/bi";
 import { OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,7 +49,7 @@ function Navbar() {
           <SignedIn>
             <SignOutButton>
               <div className="flex cursor-pointer">
-                <Image src="/images/logout.svg" alt="logout" width={22} height={22} />
+              <BiLogOut className="font-bold h-6 text-primary_text text-heading2-bold "/>
               </div>
             </SignOutButton>
           </SignedIn>

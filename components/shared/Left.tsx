@@ -1,4 +1,5 @@
 "use client";
+import { BiLogOut } from "react-icons/bi";
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -44,13 +45,6 @@ function Left() {
               key={link.label}
               className={`leftsidebar_link ${isActive && 'bg-primary-500'}`}
             >
-              {/* <Image
-                src={link.imgURL}
-                alt={link.label}
-                width={24}
-                height={24}
-              /> */}
-
             <div className='font-bold h-5 text-primary_text text-heading3-bold'>{link.logo}</div>
               
               <p className='text-primary_text max-lg:hidden'>
@@ -63,13 +57,8 @@ function Left() {
       <div className='mt-10 px-6'>
         <SignedIn>
           <SignOutButton>
-            <div className="flex cursor-pointer gap-4 p-4 cl-sign-out-button">
-              <Image
-                src="/images/logout.svg"
-                alt="logout"
-                width={22}
-                height={22}
-              />
+            <div className="flex flex-row items-center cursor-pointer gap-4 p-4 cl-sign-out-button">
+              <BiLogOut className="font-bold h-7 text-primary_text text-heading2-bold "/>
               <p className='text-primary_text max-lg:hidden'>
                 Logout
               </p>

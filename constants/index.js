@@ -7,37 +7,31 @@ import { MdPersonOutline } from "react-icons/md";
 
 export const sidebarLinks = [
     {
-      imgURL: "/images/home.svg",
       route: "/",
       label: "Home",
       logo : <RiHome6Line />
     },
     {
-      imgURL: "/images/search.svg",
       route: "/search",
       label: "Search",
       logo : <IoSearch />
     },
     {
-      imgURL: "/images/heart.svg",
       route: "/activity",
       label: "Activity",
       logo : <FaRegHeart />
     },
     {
-      imgURL: "/images/create.svg",
       route: "/create-thread",
       label: "Create Thread",
       logo : <MdOutlineAddToPhotos />
     },
     {
-      imgURL: "/images/community.svg",
       route: "/communities",
       label: "Communities",
       logo : <BsPeople />
     },
     {
-      imgURL: "/images/user.svg",
       route: "/profile",
       label: "Profile",
       logo : <MdPersonOutline />
