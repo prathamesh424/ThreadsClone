@@ -1,13 +1,35 @@
+"use client"
+
+
+import { useState, useEffect } from "react";
+
 import { OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-type NavbarProps = {
-  theme: string;
-  toggleTheme: () => void;
-};
+
  
-function Navbar({ theme, toggleTheme }: NavbarProps) {
+function Navbar() {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.classList.add(savedTheme);
+    } else {
+      document.body.classList.add(theme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(newTheme);
+  };
+
   return (
     <nav className="topbar flex justify-between items-center p-4">
       <Link href="/" className="flex items-center gap-4">
