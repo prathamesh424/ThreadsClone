@@ -6,7 +6,9 @@ import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";  
+import { correctGrammar } from "@/lib/actions/thread.actions"; // Import the correctGrammar function
 export const dynamic = 'force-dynamic';
+
 import {
   Form,
   FormControl,
@@ -28,7 +30,6 @@ interface Props {
 function PostThread({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
-
   const { organization } = useOrganization();
 
   const form = useForm<z.infer<typeof ThreadValidation>>({
@@ -48,14 +49,24 @@ function PostThread({ userId }: Props) {
         path: pathname,
       });
 
-      // Success toast
       toast.success("Thread posted successfully!");
-
-      // Redirect after posting
       router.push("/");
     } catch (error) {
-      // Error toast
       toast.error("Failed to post the thread. Please try again.");
+    }
+  };
+
+  const handleGrammarCorrection = async () => {
+    try {
+      const currentText = form.getValues("thread");
+      console.log(currentText);
+      // Get the current text from the form
+      const correctedText = await correctGrammar(currentText); // Call the grammar correction function
+      console.log(correctedText);
+      form.setValue("thread", correctedText); // Update the textarea with corrected text
+      toast.success("Grammar corrected successfully!");
+    } catch (error) {
+      toast.error("Failed to correct grammar. Please try again.");
     }
   };
 
@@ -80,10 +91,14 @@ function PostThread({ userId }: Props) {
             </FormItem>
           )}
         />
-
-        <Button type="submit" className="bg-primary-500">
-          Post Thread
-        </Button>
+        <div className="flex gap-4">
+          <Button type="button" onClick={handleGrammarCorrection} className="bg-secondary-500">
+            Correct Grammar
+          </Button>
+          <Button type="submit" className="bg-primary-500">
+            Post Thread
+          </Button>
+        </div>
       </form>
     </Form>
   );

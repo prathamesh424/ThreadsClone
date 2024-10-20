@@ -1,8 +1,11 @@
+
 import Image from "next/image";
 import Link from "next/link";
-import { CiHeart } from "react-icons/ci";
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
+import { addLikeToThread } from "@/lib/actions/thread.actions";
+import { FaHeart } from "react-icons/fa";
+
  
 interface Props {
   id: string;
@@ -26,9 +29,10 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  likes: Number;
 }
 
-function ThreadCard({
+async function ThreadCard({
   id,
   currentUserId,
   parentId,
@@ -38,7 +42,33 @@ function ThreadCard({
   createdAt,
   comments,
   isComment,
+  likes
 }: Props) {
+
+  const handleLike = async () => {
+    try {
+      const response  = await addLikeToThread(id);  
+ 
+    } catch (error) {
+      console.error("Error adding like:", error);
+    }
+  };
+
+  function formatLikes(likes: Number): string {
+    const likeValue = likes.valueOf(); 
+  
+    if (likeValue >= 1_000_000_000) {
+      return (likeValue / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';   
+    } else if (likeValue >= 1_000_000) {
+      return (likeValue / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';   
+    } else if (likeValue >= 1_000) {
+      return (likeValue / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';     
+    } else {
+      return likeValue.toString();                             
+    }
+  }
+
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -71,13 +101,23 @@ function ThreadCard({
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
-                <Image
-                  src='/images/heart-gray.svg'
-                  alt='like'
-                  width={24}
-                  height={24}
-                  className='cursor-pointer object-contain'
-                />
+            
+              { likes === 0 ? <Image
+                      src='/images/heart-gray.svg'
+                      alt='like'
+                      width={24}
+                      height={24}
+                      className='cursor-pointer object-contain'
+ 
+                    /> :
+                    <div className="flex flex-row-reverse">
+                      <FaHeart
+                        className='cursor-pointer object-contain text-red-500 ml-1 mt-1 font-bold '
+                        />
+                        <p className="text-primary_text">{formatLikes(likes)}</p>
+
+                    </div>
+              }
 
                 <Link href={`/thread/${id}`}>
                   <Image

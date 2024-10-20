@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 
- 
+
 function Navbar() {
   const [theme, setTheme] = useState("light");
 
@@ -44,6 +44,7 @@ function Navbar() {
         >
           {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
         </button> */}
+        
 
         <div className="block md:hidden">
           <SignedIn>

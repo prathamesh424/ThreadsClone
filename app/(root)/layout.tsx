@@ -5,7 +5,7 @@ import React from 'react';
 import { ClerkProvider } from '@clerk/nextjs';
 import Left from '@/components/shared/Left';
 import Right from '@/components/shared/Right';
- import { Toaster } from 'react-hot-toast'; // Import Toaster component
+ import { Toaster } from 'react-hot-toast';  
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
 
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
              <Right />
           </main>
           <Footer />
-          {/* Toaster component for toast notifications */}
+       
           <Toaster position="top-right" reverseOrder={false} />
         </body>
       </html>

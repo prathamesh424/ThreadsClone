@@ -7,6 +7,7 @@ import  connectDB  from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import { NextResponse } from "next/server";
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectDB();
@@ -209,3 +210,56 @@ export async function addCommentToThread(
     throw new Error("Unable to add comment");
   }
 }
+
+
+export async function addLikeToThread(threadId: string) {
+  await connectDB();  
+  try {
+     const thread = await Thread.findByIdAndUpdate(
+      threadId, 
+      { $inc: { likes: 1 } }, 
+      { new: true }
+    );
+    if (!thread) {
+      throw new Error("Thread not found");
+    }
+    return NextResponse.json(
+     {message : "incremented likes successfully"} ,
+     thread
+    )
+  } catch (error) {
+    console.error("Error while adding like to the thread", error);
+    throw new Error("Failed to add like to the thread");
+  }
+}
+
+
+
+export const correctGrammar = async (text: string): Promise<string> => {
+  const response = await fetch('https://api.languagetoolplus.com/v2/check', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      text: text,
+      language: 'en-US', // Change language as needed
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to correct grammar');
+  }
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  // Get the corrected text from the response
+  const correctedText = data.matches.reduce((acc: string, match: any) => {
+    return acc.replace(
+      match.context.text,
+      match.replacements.length > 0 ? match.replacements[0].value : match.context.text
+    );
+  }, text);
+
+  return correctedText;
+};
