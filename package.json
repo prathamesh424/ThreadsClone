@@ -17,6 +17,7 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@uploadthing/react": "^6.7.2",
     "class-variance-authority": "^0.7.0",
+    "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.408.0",
     "mongoose": "^8.5.1",

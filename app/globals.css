@@ -168,6 +168,7 @@
   --color4: 92, 92, 123;
 
   --primary-text: 0 , 0 ,0 ;
+  --theme-color : 255, 182, 32  ;
 
   background: rgba(var(--background));
 }
@@ -178,7 +179,7 @@
   --color2: 18, 20, 23;
   --color3: 16, 16, 18;
   --color4: 31, 31, 34;
-
+  --theme-color : 135, 126, 255 ;
   --primary-text: 255 , 255 , 255 ;
 
   background: rgba(var(--background));

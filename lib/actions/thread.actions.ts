@@ -47,38 +47,59 @@ interface Params {
   author: string,
   communityId: string | null,
   path: string,
+  title: string | null,
+  image_url:  string | null,
 }
 
-export async function createThread({ text, author, communityId, path }: Params
-) {
+export async function createThread({ text, author, communityId, path, title = null, image_url = null }: Params) {
   try {
     connectDB();
+    // Optional Cloudinary image upload logic
+    // let image_url = null;
+    // if (image) {
+    //   const response  = await fetch('/api/cloudinary', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ image }),
+    //   })
+    //   const data = await response.json();
+    //   image_url = data.publicId;
+    // }
 
-    const communityIdObject = await Community.findOne(
+    // Find community if communityId is provided
+    const communityIdObject = communityId ? await Community.findOne(
       { id: communityId },
       { _id: 1 }
-    );
+    ) : null;
+
+    // Create the thread with optional title and image_url
     const createdThread = await Thread.create({
       text,
       author,
       community: communityIdObject,
+      ...(title && { title }), // Add title if provided
+      ...(image_url && { image_url }) // Add image_url if image was uploaded
     });
 
+    // Update the author's thread list
     await User.findByIdAndUpdate(author, {
-      $push: { threads: createdThread._id }, 
+      $push: { threads: createdThread._id },
     });
 
+    // Update the community's thread list if the community exists
     if (communityIdObject) {
       await Community.findByIdAndUpdate(communityIdObject, {
         $push: { threads: createdThread._id },
       });
     }
 
+    // Revalidate the path after creating the thread
     revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Failed to create thread: ${error.message}`);
   }
 }
+
 
 async function fetchAllChildThreads(threadId: string): Promise<any[]> {
   const childThreads = await Thread.find({ parentId: threadId });

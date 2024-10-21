@@ -2,6 +2,17 @@
 import mongoose from "mongoose";
 
 const threadSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: false,
+    default: null
+  },
+  image_url: {
+    type: String,
+    required: false,
+    default: null
+  }
+  ,
   text: {
     type: String,
     required: true,

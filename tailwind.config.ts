@@ -196,7 +196,8 @@ module.exports = {
         color2 : "rgba(var(--color2))",
         color3 : "rgba(var(--color3))",
         color4 : "rgba(var(--color4))",
-        primary_text : "rgba(var(--primary-text))" ,
+        primary_text: "rgba(var(--primary-text))",
+        theme_text: "rgba(var(--theme-text))",
         
         // border: "rgba(var(--border))",
         // card: "rgba(var(--card))",
