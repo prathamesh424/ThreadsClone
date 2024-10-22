@@ -35,7 +35,8 @@ const threadSchema = new mongoose.Schema({
   },
   likes : {
     type : Number ,
-    default : 0 ,
+    default: 0,
+    required: false  
   } ,
   children: [
     {

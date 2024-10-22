@@ -55,6 +55,9 @@ async function ThreadCard({
   };
 
   function formatLikes(likes: Number): string {
+    if (!likes) {
+      return "0";
+    }
     const likeValue = likes.valueOf(); 
   
     if (likeValue >= 1_000_000_000) {
