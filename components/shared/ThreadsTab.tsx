@@ -29,7 +29,7 @@ const ThreadsTab = async ({ currentUserId,accountId,accountType} : Props) => {
         {
             result.threads.map((thread : any) => (
                 <ThreadCard 
-                 key={thread._id}
+                key={thread._id}
                 id= {thread._id}
                 currentUserId ={currentUserId || ""}  
                 parentId= {thread.parentId}
@@ -39,7 +39,8 @@ const ThreadsTab = async ({ currentUserId,accountId,accountType} : Props) => {
                         :{name: thread.author.name , image: thread.author.image , id: thread.author.id}}
                 community = {thread.community}
                 createdAt = {thread.createdAt}
-                comments= {thread.children}  />
+                    comments={thread.children}
+                likes={thread.likes}/>
             )
         )
         }
