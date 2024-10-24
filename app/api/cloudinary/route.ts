@@ -40,10 +40,12 @@ export async function POST(request : NextRequest) {
             }).end(bufferFile) ;
 
         }
-    )
+        )
+        
+        console.log("api cloifdhkjf", result)
 
     return NextResponse.json(
-        {publicId: result.public_id} , {status: 200}
+        {publicId: result.secure_url} , {status: 200}
     )
     } catch (error) {
         console.log(error) ;

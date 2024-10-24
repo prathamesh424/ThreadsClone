@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.2.3",
     "@clerk/themes": "^2.1.10",
+    "@google/generative-ai": "^0.21.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -22,6 +23,7 @@
     "lucide-react": "^0.408.0",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
+    "next-cloudinary": "^6.15.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",

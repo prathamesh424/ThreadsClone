@@ -5,6 +5,7 @@ import Pagination from "@/components/shared/Pagination";
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 
+
 async function Home({
   searchParams,
 }: {
@@ -41,6 +42,8 @@ async function Home({
                 createdAt={post.createdAt}
                 comments={post.children}
                 likes={post.likes}
+                title={post.title}
+                image_url={post.image_url}
               />
             ))}
           </>

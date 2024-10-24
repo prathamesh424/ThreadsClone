@@ -256,13 +256,16 @@ export async function addLikeToThread(threadId: string) {
 
 
 
+// pages/api/correct-grammar.ts
+
 export const correctGrammar = async (text: string): Promise<string> => {
-  const response = await fetch('https://api.languagetoolplus.com/v2/check', {
+  const response = await fetch('https://api.gemini.com/v1/check', { // Replace with actual Gemini API endpoint
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+      'Authorization': `${process.env.GEMINI_API_KEY}`, // Replace with your actual API key
     },
-    body: new URLSearchParams({
+    body: JSON.stringify({
       text: text,
       language: 'en-US', // Change language as needed
     }),
@@ -271,16 +274,40 @@ export const correctGrammar = async (text: string): Promise<string> => {
   if (!response.ok) {
     throw new Error('Failed to correct grammar');
   }
-  console.log(response);
+
   const data = await response.json();
   console.log(data);
-  // Get the corrected text from the response
-  const correctedText = data.matches.reduce((acc: string, match: any) => {
-    return acc.replace(
-      match.context.text,
-      match.replacements.length > 0 ? match.replacements[0].value : match.context.text
-    );
-  }, text);
-
-  return correctedText;
+  
+  // Assuming the corrected text is in data.correctedText
+  return data.correctedText;
 };
+ 
+
+// export const correctGrammar = async (text: string): Promise<string> => {
+//   const response = await fetch('https://api.languagetoolplus.com/v2/check', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     body: new URLSearchParams({
+//       text: text,
+//       language: 'en-US', // Change language as needed
+//     }),
+//   });
+
+//   if (!response.ok) {
+//     throw new Error('Failed to correct grammar');
+//   }
+//   console.log(response);
+//   const data = await response.json();
+//   console.log(data);
+//   // Get the corrected text from the response
+//   const correctedText = data.matches.reduce((acc: string, match: any) => {
+//     return acc.replace(
+//       match.context.text,
+//       match.replacements.length > 0 ? match.replacements[0].value : match.context.text
+//     );
+//   }, text);
+
+//   return correctedText;
+// };

@@ -6,14 +6,13 @@ import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";  
-import { correctGrammar } from "@/lib/actions/thread.actions"; // Import the correctGrammar function
-import { createThread } from "@/lib/actions/thread.actions"; // Import your createThread action
+import { createThread } from "@/lib/actions/thread.actions";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input"; // Use Input for title and file upload
+import { Input } from "@/components/ui/input"; 
 import { ThreadValidation } from "@/lib/validations/thread";
-import { useState } from "react"; // State for file upload
+import { useState } from "react";  
 
 interface Props {
   userId: string;
@@ -24,14 +23,14 @@ function PostThread({ userId }: Props) {
   const pathname = usePathname();
   const { organization } = useOrganization();
   
-  const [image, setImage] = useState<File | null>(null); // State to hold the uploaded image file
+  const [image, setImage] = useState<File | null>(null); 
 
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: "",
       accountId: userId,
-      title: "", // Title added to form
+      title: "",
     },
   });
 
@@ -39,34 +38,30 @@ function PostThread({ userId }: Props) {
   try {
     let image_url = null;
 
-    // If an image is selected, upload it to Cloudinary
     if (image) {
       const formData = new FormData();
-      formData.append('image', image); // Pass the image file to formData
+      formData.append('image', image);
 
       const response = await fetch('/api/cloudinary', {
         method: 'POST',
-        body: formData, // Send formData with the image
+        body: formData,
       });
 
       const data = await response.json();
-      image_url = data.publicId; // Store the Cloudinary publicId as image_url
+      console.log("image upload data :...." ,data);
+      image_url = data.publicId;
     }
 
-    // Prepare data to send to backend
     const threadData = {
       text: values.thread,
-      title: values.title || null,  // Title is optional
+      title: values.title || null,
       author: userId,
       communityId: organization ? organization.id : null,
       path: pathname,
-      image_url: image_url, // Pass the uploaded image URL or null if no image was uploaded
+      image_url: image_url, 
     };
-
-    // Call the backend to create the thread
     await createThread(threadData);
 
-    // Success notification and redirect
     toast.success("Thread posted successfully!");
     router.push("/");
   } catch (error) {
@@ -75,19 +70,36 @@ function PostThread({ userId }: Props) {
 };
 
 
-  // Grammar correction logic
-  const handleGrammarCorrection = async () => {
-    try {
-      const currentText = form.getValues("thread");
-      const correctedText = await correctGrammar(currentText);
-      form.setValue("thread", correctedText); // Update the textarea with corrected text
-      toast.success("Grammar corrected successfully!");
-    } catch (error) {
-      toast.error("Failed to correct grammar. Please try again.");
-    }
-  };
+const handleGrammarCorrection = async () => {
+  try {
+    const currentText = form.getValues("thread");
+    const language = "en-US"; 
 
-  // Handle image file selection
+    const requestBody = {
+      thread: currentText,
+      language: language, 
+    };
+
+    const response = await fetch('/api/correct-grammar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to correct grammar');
+    }
+
+    const { correctedText } = await response.json();
+    form.setValue("thread", correctedText);
+    toast.success("Grammar corrected successfully!");
+  } catch (error) {
+    toast.error("Failed to correct grammar. Please try again.");
+  }
+};
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setImage(e.target.files[0]);

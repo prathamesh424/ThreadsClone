@@ -5,6 +5,7 @@ import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
 import { addLikeToThread } from "@/lib/actions/thread.actions";
 import { FaHeart } from "react-icons/fa";
+import { CldImage } from 'next-cloudinary'
 
  
 interface Props {
@@ -30,6 +31,8 @@ interface Props {
   }[];
   isComment?: boolean;
   likes: Number;
+  title: string;
+  image_url: string;
 }
 
 async function ThreadCard({
@@ -42,7 +45,9 @@ async function ThreadCard({
   createdAt,
   comments,
   isComment,
-  likes
+  likes,
+  title, 
+  image_url
 }: Props) {
 
   const handleLike = async () => {
@@ -53,6 +58,10 @@ async function ThreadCard({
       console.error("Error adding like:", error);
     }
   };
+  var isUrl = null;
+
+  if (image_url != null)
+    isUrl = image_url;
 
   function formatLikes(likes: Number): string {
     if (!likes) {
@@ -89,7 +98,6 @@ async function ThreadCard({
                 className='cursor-pointer rounded-full'
               />
             </Link>
-
             <div className='thread-card_bar' />
           </div>
 
@@ -99,8 +107,10 @@ async function ThreadCard({
                 {author.name}
               </h4>
             </Link>
-
-            <p className='mt-2 text-small-regular text-primary_text font-bold'>{content}</p>
+            <img src={image_url} alt="thumbnail" className="rounded-lg" />
+            <h1 className="text-secondary-500 text-heading4-bold mt-2 font-extrabold font-serif ">{title}</h1>
+            <p className='mt-2 text-small-regular text-primary_text'>{content}</p>
+            
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
